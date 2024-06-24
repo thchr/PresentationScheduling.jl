@@ -30,7 +30,7 @@ The results can be visualized with `show_schedule`:
 
 > ![`show_schedule(individuals, dates, m, cannot_attend)`](example-schedule.png)
 
-[ci-status-img]: https://github.com/thchr/PresentationScheduling.jl/actions/workflows/CI.yml/badge.svg?branch=main
-[ci-status-url]: https://github.com/thchr/PresentationScheduling.jl/actions/workflows/CI.yml?query=branch%3Amain
+[ci-status-img]: https://github.com/thchr/PresentationScheduling.jl/actions/workflows/ci.yml/badge.svg?branch=main
+[ci-status-url]: https://github.com/thchr/PresentationScheduling.jl/actions/workflows/ci.yml?query=branch%3Amain
 [coverage-img]:  https://codecov.io/gh/thchr/PresentationScheduling.jl/branch/main/graph/badge.svg
 [coverage-url]:  https://codecov.io/gh/thchr/PresentationScheduling.jl
