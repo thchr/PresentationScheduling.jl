@@ -179,22 +179,24 @@ function is_cannot_attend(data, i, j, individuals, dates, cannot_attend)
     return any(==(date), absence_dates)
 end
 """
-    show_schedule(individuals, dates, m, [cannot_attend]; backend)
+    show_schedule([io :: IO], individuals, dates, m, [cannot_attend]; backend)
 
 Given an optimized model `m`, and associated iterables of `individuals` and `dates`, print
-the associated schedule to `stdout` as a table.
+the associated schedule to `io` (default, `stdout`) as a table.
 
 The table can optionally be printed as HTML by setting the keyword argument `backend` to
 `Val(:html)` (default: `Val(:text)`).
 """
-function show_schedule(individuals, dates, m, cannot_attend=nothing; backend=Val(:text))
+function show_schedule(
+            io::IO, individuals, dates, m, cannot_attend=nothing;
+            backend=Val(:text))
     if termination_status(m) ≠ INFEASIBLE
         x = value.(object_dictionary(m)[:x])
         y = value.(object_dictionary(m)[:y])
 
-        printstyled(" ●︎ research presentation  ")
-        printstyled("■ journal club  ", color = :blue)
-        printstyled("▉ cannot attend\n"; color = :red)
+        printstyled(io, " ●︎ research presentation  ")
+        printstyled(io, "■ journal club  ", color = :blue)
+        printstyled(io, "▉ cannot attend\n"; color = :red)
 
         highlighters = if backend == Val(:text)
             (
@@ -204,7 +206,7 @@ function show_schedule(individuals, dates, m, cannot_attend=nothing; backend=Val
         else
             Tuple{}()
         end
-        pretty_table(x;
+        pretty_table(io, x;
             backend = backend,
             header = [stringify_date(date) for date in dates],
             row_labels = [string(individual) for individual in individuals],
@@ -212,10 +214,13 @@ function show_schedule(individuals, dates, m, cannot_attend=nothing; backend=Val
             formatters = (v,i,j) -> v≈1 ? (y[i,j]>0.5 ? "■" : "●︎") : "",
             highlighters = highlighters
         )
-        print("Objective value (total badness): ", objective_value(m))
+        print(io, "Objective value (total badness): ", objective_value(m))
     else
-        print("No feasible solution found.")
+        print(io, "No feasible solution found.")
     end
+end
+function show_schedule(individuals, dates, m, cannot_attend=nothing; kws...)
+    show_schedule(stdout, individuals, dates, m, cannot_attend=nothing; kws...)
 end
 
 end # module

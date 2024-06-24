@@ -1,4 +1,5 @@
-using PresentationScheduling, Test
+using Test
+using PresentationScheduling
 
 # ---------------------------------------------------------------------------------------- #
 # README example
@@ -22,5 +23,13 @@ m = optimize_presentation_schedule(
     time_limit=20)
 
 @test PresentationScheduling.objective_value(m) < 0.36
+
+# test `show_schedule`
+io = IOBuffer()
+show_schedule(io, individuals, dates, m, cannot_attend)
+s = String(take!(io))
+lines = collect(eachline(IOBuffer(s)))
+malcolm_row = lines[findfirst(contains("Malcolm"), lines)]
+@test count('●', malcolm_row) == 1
 
 # ---------------------------------------------------------------------------------------- #
