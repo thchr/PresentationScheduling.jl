@@ -24,4 +24,5 @@ m = optimize_presentation_schedule(
     time_limit=20)
 ```
 The results can be visualized with `show_schedule`:
-![`show_schedule(individuals, dates, m, cannot_attend)`](example-schedule.png)
+
+> ![`show_schedule(individuals, dates, m, cannot_attend)`](example-schedule.png)
