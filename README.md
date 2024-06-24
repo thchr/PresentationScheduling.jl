@@ -8,6 +8,7 @@ using PresentationScheduling
 
 dates = Date("2024-08-28"):Week(2):Date("2024-12-18")
 individuals = ["John", "Jane", "Bob", "Alice", "Sven", "Luis", "Jean", "Malcolm"]
+
 presentations_modify = Dict("Malcolm" => 1, "Alice" => 3)
 journals_modify = Dict("Malcolm" => 0, "Alice" => 0, "Sven" => 0)
 cannot_attend = Dict("Malcolm" => dates[3:end])
