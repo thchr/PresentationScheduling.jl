@@ -1,7 +1,7 @@
 name = "PresentationScheduling"
 uuid = "5e91a2ef-9aa0-5e70-a688-1b4db15e1463"
 authors = ["Thomas Christensen <thomas@dtu.dk>"]
-version = "0.0.1"
+version = "0.1.0"
 
 [deps]
 Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
@@ -10,6 +10,7 @@ JuMP = "4076af6c-e467-56ae-b986-b466b2749572"
 PrettyTables = "08abe8d2-0d0c-5749-adfa-8a2ac140af0d"
 
 [compat]
+julia = "1.10"
 HiGHS = "1.9.1"
 JuMP = "1.22"
 PrettyTables = "2.3.2"
