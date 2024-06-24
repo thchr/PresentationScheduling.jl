@@ -1,4 +1,4 @@
-# PresentationSchedule.jl
+# PresentationScheduling.jl
 
 [![Build status][ci-status-img]][ci-status-url] [![Coverage][coverage-img]][coverage-url]
 
