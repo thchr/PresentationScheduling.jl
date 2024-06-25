@@ -5,9 +5,10 @@ function Base.show(io::IO, ::MIME"text/plain", schedule :: PresentationSchedule)
         x = value.(object_dictionary(model)[:x])
         y = value.(object_dictionary(model)[:y])
 
-        printstyled(io, " ●︎ research presentation  ")
-        printstyled(io, "■ journal club  ", color = :blue)
-        printstyled(io, "▉ cannot attend\n"; color = :red)
+        print(io, " ")
+        printstyled(io, "●︎ research presentation  "; color = :blue)
+        printstyled(io, "■ journal club  ";          color = :green)
+        printstyled(io, "▉ cannot attend\n";        color = :red)
 
         pretty_table(io, x;
             backend = Val(:text),
@@ -16,13 +17,15 @@ function Base.show(io::IO, ::MIME"text/plain", schedule :: PresentationSchedule)
             alignment = :c,
             formatters = (v,i,j) -> v≈1 ? (y[i,j]>0.5 ? "■" : "●︎") : "",
             highlighters = (
-                Highlighter((data,i,j) -> y[i,j]>0.5; foreground = :blue),
+                Highlighter((data,i,j) -> data[i,j]≈1 && y[i,j]>0.5; foreground = :green),
+                Highlighter((data,i,j) -> data[i,j]≈1 && y[i,j]<0.5; foreground = :blue),
                 Highlighter((data,i,j) -> 
                     is_cannot_attend(data, i, j, individuals, dates, cannot_attend);
                     background = :red)
                 )
         )
-        print(io, "Objective value (total badness): ", objective_value(model))
+        printstyled(io, "Objective value (total badness): ", objective_value(model);
+                    color = :light_black)
     else
         print(io, "No feasible solution found.")
     end
