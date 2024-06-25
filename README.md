@@ -15,7 +15,7 @@ presentations_modify = Dict("Malcolm" => 1, "Alice" => 3)
 journals_modify = Dict("Malcolm" => 0, "Alice" => 0, "Sven" => 0)
 cannot_attend = Dict("Malcolm" => dates[3:end])
 
-m = optimize_presentation_schedule(
+schedule = optimize_presentation_schedule(
     individuals, dates, presentations_modify, journals_modify, cannot_attend;
     default_presentations=2,
     min_total=2,
@@ -26,7 +26,7 @@ m = optimize_presentation_schedule(
     max_journals=1,
     time_limit=20)
 ```
-The results can be visualized with `show_schedule`:
+Which returns a `PresentationSchedule` that displays as a time-table:
 
 > ![`show_schedule(individuals, dates, m, cannot_attend)`](example-schedule.png)
 
